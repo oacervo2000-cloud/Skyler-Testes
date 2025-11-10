@@ -1,0 +1,28 @@
+# requirements.txt
+# Lista de dependências para o projeto Analisador Astronômico
+
+# Núcleo de computação científica
+numpy
+pandas
+
+# Bibliotecas astronômicas
+astropy
+astroplan
+astroquery
+
+# Biblioteca para geocodificação (obter coordenadas de cidades)
+geopy
+
+# Aplicação Web
+streamlit
+
+# Plotagem
+matplotlib
+seaborn
+
+# Outras utilidades
+pytz  # Para fusos horários
+requests # Para a API de previsão do tempo
+tqdm # Para barras de progresso
+ipywidgets # Para os notebooks interativos
+ipython # Para execução em notebooks
