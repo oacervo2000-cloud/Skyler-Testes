@@ -2,62 +2,49 @@
 
 """
 Módulo de Plotagem.
-
-Contém funções para gerar os gráficos de visibilidade e mapas celestes.
+... (comentários como antes) ...
 """
 
-from .config import plt, np, u
+from .config import plt, np, u, AltAz, SkyCoord, pd
 from matplotlib.dates import DateFormatter
+import seaborn as sns
 
 def plot_target_visibility(
-    target_name,
-    times_local,
-    target_altaz,
-    night_events,
-    observer_location,
-    observer_timezone
+    # ... (código da função como antes) ...
 ):
+    # ... (código da função como antes) ...
+
+def plot_sky_map(
+    # ... (código da função como antes) ...
+):
+    # ... (código da função como antes) ...
+
+def plot_yearly_visibility(df_year, target_name, year):
     """
-    Gera o gráfico de visibilidade (Altitude/Airmass) para um único alvo.
+    Gera um mapa de calor para visualizar a visibilidade de um alvo ao longo do ano.
     """
-    fig, ax1 = plt.subplots(figsize=(15, 7))
+    if df_year.empty:
+        print(f"Nenhum dado de visibilidade para plotar para {target_name} em {year}.")
+        return
 
-    altitudes = target_altaz.alt
-    airmass = target_altaz.secz
+    # Preparar os dados para o heatmap
+    df_year['month'] = df_year['date'].dt.month
+    df_year['day'] = df_year['date'].dt.day
 
-    # --- Plotagem da Altitude ---
-    color_alt = 'crimson'
-    ax1.set_xlabel(f"Horário Local ({observer_timezone.zone})")
-    ax1.set_ylabel('Altitude (Graus)', color=color_alt)
-    ax1.plot(times_local, altitudes, color=color_alt, label=f'Altitude de {target_name}')
-    ax1.tick_params(axis='y', labelcolor=color_alt)
-    ax1.set_ylim(0, 90)
-    ax1.grid(True, linestyle=':', alpha=0.7)
+    # Pivotar a tabela para criar uma matriz [mês x dia]
+    heatmap_data = df_year.pivot_table(index='month', columns='day', values='duration_hours')
 
-    # --- Plotagem da Airmass ---
-    ax2 = ax1.twinx()
-    color_air = 'dodgerblue'
-    ax2.set_ylabel('Airmass', color=color_air)
-    ax2.plot(times_local, airmass, color=color_air, label=f'Airmass de {target_name}')
-    ax2.tick_params(axis='y', labelcolor=color_air)
-    ax2.set_ylim(1, 4) # Limite razoável para airmass
-    ax2.invert_yaxis()
+    plt.figure(figsize=(15, 6))
+    sns.heatmap(heatmap_data, cmap='viridis', robust=True)
 
-    # --- Linhas de Eventos e Sombreamento ---
-    if night_events.get('evening_astro_twilight') and night_events.get('morning_astro_twilight'):
-        start_night = night_events['evening_astro_twilight'].to_datetime(observer_timezone)
-        end_night = night_events['morning_astro_twilight'].to_datetime(observer_timezone)
-        ax1.axvspan(start_night, end_night, alpha=0.2, color='gray', label='Noite Astronômica')
-
-    # Formatação do eixo X
-    ax1.xaxis.set_major_formatter(DateFormatter('%H:%M', tz=observer_timezone))
-    fig.autofmt_xdate()
-
-    # Título e Legenda
-    analysis_date_str = times_local[0].strftime('%Y-%m-%d')
-    plt.title(f"Plano de Observação para {target_name} em {analysis_date_str}", fontsize=16)
-    fig.legend(loc='upper right', bbox_to_anchor=(0.9, 0.9))
+    plt.title(f'Calendário de Visibilidade para {target_name} em {year} (horas > 30°)')
+    plt.xlabel('Dia do Mês')
+    plt.ylabel('Mês')
+    plt.yticks(ticks=np.arange(12) + 0.5, labels=[
+        'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun',
+        'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'
+    ], rotation=0)
 
     plt.show()
 
-print("Módulo de Plotagem (src/plotting.py) carregado.")
+print("Módulo de Plotagem (src/plotting.py) carregado e aprimorado.")
