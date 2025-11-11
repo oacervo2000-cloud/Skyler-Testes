@@ -2,9 +2,9 @@
 
 Este repositório contém uma ferramenta avançada para planejamento de observações astronômicas. Utilizando uma arquitetura modular em Python, a ferramenta permite que astrônomos amadores e profissionais analisem a visibilidade de corpos celestes a partir de qualquer localização na Terra.
 
-A ferramenta oferece duas interfaces principais:
-1.  **Aplicação Web com Streamlit (Recomendado)**: Uma interface gráfica interativa, ideal para uso rápido e visual.
-2.  **Jupyter Notebook**: Para usuários que desejam explorar a análise de forma mais profunda ou personalizar o código.
+A ferramenta oferece duas interfaces principais para atender a diferentes necessidades:
+1.  **Aplicação Web com Streamlit**: Uma interface gráfica interativa, ideal para uso rápido e visual.
+2.  **Jupyter Notebook**: Para usuários que desejam explorar a análise de forma mais profunda, personalizar o código ou integrá-lo em seus próprios scripts.
 
 ---
 
@@ -26,84 +26,79 @@ A ferramenta oferece duas interfaces principais:
 
 ---
 
-## Como Usar
-
-### 1. Pré-requisitos
--   Python 3.8 ou superior.
--   `pip` (gerenciador de pacotes do Python).
-
-### 2. Instalação
-Clone o repositório e instale as dependências:
+## Instalação
+Antes de usar qualquer uma das interfaces, clone o repositório e instale as dependências:
 ```bash
 git clone https://github.com/seu-usuario/seu-repositorio.git  # Substitua pela URL correta
 cd seu-repositorio
 pip install -r requirements.txt
 ```
 
-### 3. Executando a Aplicação Web
-A maneira mais fácil de usar a ferramenta é através da aplicação Streamlit. No terminal, execute:
-```bash
-streamlit run app.py
-```
-Isso iniciará um servidor local e abrirá a aplicação no seu navegador.
+---
+
+## Opções de Uso
+
+Você pode escolher a interface que melhor se adapta ao seu fluxo de trabalho.
+
+### Opção 1: Aplicação Web (Streamlit)
+Ideal para uma experiência visual e interativa sem necessidade de código.
+1.  **Inicie o Servidor**: No terminal, execute o comando:
+    ```bash
+    streamlit run app.py
+    ```
+2.  **Use a Interface**: A aplicação abrirá no seu navegador. Siga as instruções no tutorial abaixo.
+
+### Opção 2: Jupyter Notebook
+Ideal para personalização, análise de dados e integração com outros scripts Python.
+1.  **Inicie o Servidor Jupyter**: No terminal, execute:
+    ```bash
+    jupyter notebook
+    ```
+2.  **Abra o Notebook**: No seu navegador, abra o arquivo `analise_astronomica.ipynb`.
+3.  **Siga o Guia**: O próprio notebook contém instruções detalhadas em células de Markdown.
 
 ---
 
-## Tutorial Passo a Passo da Aplicação Web
+## Tutorial da Aplicação Web (Streamlit)
 
 ### Passo 1: Configurar a Análise
-Na barra lateral esquerda, configure os parâmetros da sua sessão de observação:
-1.  **Defina sua Localização**: Em **📍 Localização do Observador**, digite o nome da sua cidade (ex: `São Francisco do Sul, Brazil`) e clique em **Definir Localização**.
-2.  **Ajuste a Data**: Em **Data da Análise Noturna**, selecione a data desejada.
-3.  **Defina a Elevação Mínima**: Use o slider **Elevação Mínima (°) **. Um alvo só é considerado "visível" quando está acima desta altitude.
+Na barra lateral esquerda, configure os parâmetros da sua sessão:
+1.  **Defina sua Localização**: Digite o nome da sua cidade (ex: `São Francisco do Sul, Brazil`) e clique em **Definir Localização**.
+2.  **Ajuste a Data e Elevação**: Selecione a data desejada e a elevação mínima para a observação.
 
-### Passo 2: Executar uma Análise Noturna
-1.  **Selecione a Aba**: Clique na aba **🌙 Análise Noturna**.
-2.  **Escolha os Alvos**: Selecione os grupos de alvos ou adicione os seus na caixa de texto. Por exemplo:
+### Passo 2: Executar Análise Noturna ou Anual
+-   Use a aba **🌙 Análise Noturna** para ver a visibilidade de múltiplos alvos em uma noite.
+-   Use a aba **📅 Calendário Anual** para ver o melhor período do ano para observar um único alvo.
+
+#### **Interpretando os Resultados**
+-   **Gráfico de Visibilidade (Análise Noturna)**: Mostra a altitude de um alvo ao longo da noite. A área verde indica a janela de observação ideal.
+-   **Calendário Anual (Mapa de Calor)**: Mostra a duração da visibilidade (em horas) para cada noite do ano. Cores claras (amarelo) significam mais horas de observação.
+
+---
+
+## Tutorial do Jupyter Notebook
+
+O notebook é projetado para ser autoexplicativo. O fluxo de trabalho é simples:
+
+### Passo 1: Abra e Leia
+-   Após iniciar o Jupyter e abrir `analise_astronomica.ipynb`, leia as instruções nas células de Markdown.
+
+### Passo 2: Configure a Análise
+-   Encontre a célula de código marcada como **"⚙️ 2. Configurações da Análise"**.
+-   Edite as variáveis Python diretamente nesta célula para definir sua cidade, a data da análise, os alvos desejados e a elevação mínima.
+    ```python
+    # Exemplo de configuração
+    NOME_DA_CIDADE = "Vitória da Conquista, Brazil"
+    DATA_ANALISE = date(2024, 7, 15)
+    alvos_manuais = ["NGC 5128", "M83"]
+    ALVO_ANUAL = "M42"
     ```
-    M87
-    Centaurus A
-    ```
-3.  **Gere a Análise**: Clique em **Gerar Análise da Noite**.
 
-#### **Exemplo de Output: Gráfico de Visibilidade**
-Para cada alvo, um gráfico será gerado. Ele mostra a altitude do objeto no céu ao longo da noite.
-
--   **Eixo Y (Altitude)**: Mostra a altura do alvo em graus, de 0° (horizonte) a 90° (zênite).
--   **Eixo X (Hora)**: Mostra o tempo, desde o início da noite até o amanhecer.
--   **Linha Azul**: Trajetória do alvo no céu.
--   **Linha Tracejada Horizontal**: Sua elevação mínima definida.
--   **Área Verde**: **A Janela de Observação Ideal.** Este é o período em que o alvo está acima da sua elevação mínima, sendo o melhor momento para observá-lo.
-
-```
-      Altitude (°)
-      90 |
-         |      /----\
-      60 |     /      \
-         |    /        \
-      30 |---/----------\--- [Elevação Mínima]
-         |  /            \
-       0 +------------------
-         18:00  21:00  00:00
-              Hora
-```
-
-### Passo 3: Gerar um Calendário Anual
-1.  **Selecione a Aba**: Clique na aba **📅 Calendário Anual**.
-2.  **Defina o Alvo e o Ano**: Digite o nome do alvo (ex: `Andromeda Galaxy` ou `M31`) e o ano desejado.
-3.  **Gere o Calendário**: Clique em **Gerar Calendário Anual**.
-
-#### **Exemplo de Output: Calendário Anual (Mapa de Calor)**
-Um mapa de calor visualiza os melhores meses para observar um alvo.
-
--   **Eixo Y (Mês)**: De Janeiro a Dezembro.
--   **Eixo X (Dia do Mês)**: De 1 a 31.
--   **Cor da Célula**: Indica a duração (em horas) em que o alvo está acima da elevação mínima naquela noite.
-    -   **Amarelo (Claro)**: Muitas horas de visibilidade. Noites excelentes.
-    -   **Verde/Azul (Intermediário)**: Algumas horas de visibilidade. Noites boas.
-    -   **Roxo/Preto (Escuro)**: Pouca ou nenhuma visibilidade. Noites ruins ou impossíveis.
-
-Este gráfico permite identificar rapidamente, por exemplo, que "a Galáxia de Andrômeda é melhor observada entre Setembro e Dezembro".
+### Passo 3: Execute as Células
+-   Execute as células de código em ordem.
+-   A célula **"🌙 3. Execução da Análise Noturna"** gerará os gráficos de visibilidade para os alvos noturnos.
+-   A célula **"📅 4. Execução da Análise Anual"** gerará o calendário de visibilidade para o alvo anual.
+-   Os resultados (gráficos e saídas de texto) aparecerão diretamente no notebook.
 
 ---
 
