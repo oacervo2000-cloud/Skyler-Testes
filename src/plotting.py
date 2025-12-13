@@ -55,6 +55,7 @@ def plot_sky_map(targets_coords, observer_location, time):
     ax.set_theta_zero_location('N')
     ax.set_theta_direction(-1)
     ax.set_rlim(0, 90)
+    ax.set_yticks([0, 30, 60, 90])  # Definir posições dos ticks
     ax.set_yticklabels(['90° (Zênite)', '60°', '30°', '0° (Horizonte)'])
     ax.set_title(f'Mapa do Céu em {time.to_datetime():%Y-%m-%d %H:%M} UTC')
     ax.legend(bbox_to_anchor=(1.1, 1.1))

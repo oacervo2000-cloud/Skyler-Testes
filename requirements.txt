@@ -2,27 +2,32 @@
 # Lista de dependências para o projeto Analisador Astronômico
 
 # Núcleo de computação científica
-numpy
-pandas
+numpy>=1.20.0
+pandas>=1.3.0
 
 # Bibliotecas astronômicas
-astropy
-astroplan
-astroquery
+astropy>=5.0.0
+astroplan>=0.8.0
+astroquery>=0.4.6
 
 # Biblioteca para geocodificação (obter coordenadas de cidades)
-geopy
+geopy>=2.2.0
 
 # Aplicação Web
-streamlit
+streamlit>=1.20.0
 
 # Plotagem
-matplotlib
-seaborn
+matplotlib>=3.5.0
+seaborn>=0.11.0
 
 # Outras utilidades
-pytz  # Para fusos horários
-requests # Para a API de previsão do tempo
-tqdm # Para barras de progresso
-ipywidgets # Para os notebooks interativos
-ipython # Para execução em notebooks
+pytz>=2021.3  # Para fusos horários
+requests>=2.26.0 # Para a API de previsão do tempo
+tqdm>=4.62.0 # Para barras de progresso
+ipywidgets>=7.6.0 # Para os notebooks interativos
+ipython>=7.28.0 # Para execução em notebooks
+nbformat>=5.1.0 # Para criar notebooks programaticamente
+
+# Testes
+pytest>=7.0.0
+pytest-cov>=3.0.0

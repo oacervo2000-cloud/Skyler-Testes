@@ -1,0 +1,83 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "skyler-astro"
+version = "1.0.0"
+description = "Ferramenta educacional para planejamento de observações astronômicas"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [
+    {name = "Projeto Skyler", email = "skyler@example.com"}
+]
+keywords = ["astronomy", "observation", "planning", "education", "astropy"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Education",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering :: Astronomy",
+    "Topic :: Education",
+]
+
+dependencies = [
+    "numpy>=1.20.0",
+    "pandas>=1.3.0",
+    "astropy>=5.0.0",
+    "astroplan>=0.8.0",
+    "astroquery>=0.4.6",
+    "geopy>=2.2.0",
+    "streamlit>=1.20.0",
+    "matplotlib>=3.5.0",
+    "seaborn>=0.11.0",
+    "pytz>=2021.3",
+    "requests>=2.26.0",
+    "tqdm>=4.62.0",
+    "ipywidgets>=7.6.0",
+    "ipython>=7.28.0",
+    "nbformat>=5.1.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=3.0.0",
+    "black>=22.0.0",
+    "flake8>=4.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/seu-usuario/Skyler-Testes"
+Documentation = "https://github.com/seu-usuario/Skyler-Testes/blob/main/README.md"
+Repository = "https://github.com/seu-usuario/Skyler-Testes"
+"Bug Tracker" = "https://github.com/seu-usuario/Skyler-Testes/issues"
+
+[project.scripts]
+skyler-streamlit = "streamlit:run app.py"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
+addopts = "-v --cov=src --cov-report=term-missing"
+
+[tool.black]
+line-length = 100
+target-version = ['py38', 'py39', 'py310', 'py311']
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.venv
+  | build
+  | dist
+)/
+'''
